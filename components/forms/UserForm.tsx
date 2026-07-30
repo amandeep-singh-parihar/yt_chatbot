@@ -9,15 +9,24 @@ interface FormInput {
 }
 
 function UserForm({}: Props) {
-  const {register, handleSubmit} = useForm<FormInput>()
+  const {
+    register,
+    handleSubmit,
+    formState:{errors}
+  } = useForm<FormInput>()
   const onSubmit: SubmitHandler<FormInput> = (data) => {
     console.log(data);
+    const video_id = data.video_url.split("v=")[1];
+    console.log(video_id)
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className='flex items-center justify-center flex-col'>
-        <input type="text" {...register("video_url")} className='border-2'/>
-        <input type="text" {...register("query")} className='border-2'/>
+        <input type="text" {...register("video_url", {required:true})} className='border-2'/>
+        {errors.video_url && <span>Video Url is required</span>}
+
+        <input type="text" {...register("query", {required:true})} className='border-2'/>
+        {errors.query && <span>Query is required</span>}
 
         <button type='submit'>Submit</button>
       </div>
