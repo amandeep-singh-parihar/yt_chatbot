@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output
+.next/
+out/
+build/
+dist/
+
+# Python backend (has its own formatting)
+python_backend/
+
+# Public assets
+public/
+
+# Package files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Markdown
+*.md
+
+# Environment files
+.env*
