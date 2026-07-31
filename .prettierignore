@@ -8,7 +8,7 @@ build/
 dist/
 
 # Python backend (has its own formatting)
-python_backend/
+server/
 
 # Public assets
 public/
