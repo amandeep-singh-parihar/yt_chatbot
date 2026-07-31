@@ -6,10 +6,20 @@ interface ChatMessageProps {
 }
 
 export default function ChatMessage({ role, content }: ChatMessageProps) {
+  const isUser = role === 'user';
   return (
-    <div className={`message message--${role}`} id={`message-${role}`}>
-      <div className="message-avatar">
-        {role === 'user' ? (
+    <div
+      className={`animate-message flex max-w-[85%] gap-3 opacity-0 ${
+        isUser ? 'self-end flex-row-reverse' : 'self-start'
+      }`}
+      id={`message-${role}`}
+    >
+      <div
+        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded text-sm font-bold ${
+          isUser ? 'bg-[#ff0033] text-white' : 'bg-[rgba(100,50,255,0.15)] text-[#b080ff]'
+        }`}
+      >
+        {isUser ? (
           'Y'
         ) : (
           <svg
@@ -23,7 +33,15 @@ export default function ChatMessage({ role, content }: ChatMessageProps) {
           </svg>
         )}
       </div>
-      <div className="message-content">{content}</div>
+      <div
+        className={`rounded-2xl px-4 py-3 text-sm leading-relaxed break-words ${
+          isUser
+            ? 'rounded-br-sm border border-[rgba(255,0,51,0.15)] bg-[rgba(255,0,51,0.1)] text-[#f0f0f5]'
+            : 'rounded-bl-sm border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] text-[#f0f0f5]'
+        }`}
+      >
+        {content}
+      </div>
     </div>
   );
 }
