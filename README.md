@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# YouTube Chatbot 🎥💬
+
+An interactive chat application that allows users to chat with any YouTube video. The application automatically fetches the video transcript, chunks and embeds the text using OpenAI Embeddings, stores it in a FAISS vector database, and uses a LangChain RAG (Retrieval-Augmented Generation) pipeline to answer user queries based strictly on the video's transcript.
+
+![Application Screenshot](assets/image.png)
+
+## Features
+
+- **Premium Dark UI**: A sleek, modern glassmorphic interface with smooth micro-animations.
+- **YouTube URL Parsing & Preview**: Automatically extracts video ID and shows a thumbnail preview of the video when a link is pasted.
+- **Real-time Streaming/Loading State**: Displays a loading skeleton/indicator while fetching and processing answers.
+- **Modular Architecture**: Clean separation of concerns between Frontend (Next.js) and Backend (FastAPI + LangChain).
+- **RAG Pipeline**: Embedded using OpenAI (`text-embedding-3-small`) and queried via FAISS similarity search.
+
+---
+
+## Tech Stack
+
+### Frontend
+- **Framework**: [Next.js](https://nextjs.org/) (App Router, TypeScript)
+- **Styling**: Vanilla CSS (Premium theme defined in `app/globals.css`)
+- **Forms**: `react-hook-form`
+- **Code Style**: Prettier
+
+### Backend
+- **Framework**: [FastAPI](https://fastapi.tiangolo.com/)
+- **Orchestration**: [LangChain](https://python.langchain.com/)
+- **Vector Database**: [FAISS](https://github.com/facebookresearch/faiss)
+- **LLM / Embeddings**: OpenAI (`gpt-4o`/`text-embedding-3-small`)
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js (v18+)
+- Python 3.10+
+- OpenAI API Key
 
+### Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/amandeep-singh-parihar/yt_chatbot.git
+   cd yt_chatbot
+   ```
+
+2. **Configure Environment Variables:**
+   Copy the example environment file and add your API keys:
+   ```bash
+   cp .env.example .env
+   ```
+   Edit `.env` and provide your `OPENAI_API_KEY`.
+
+### Frontend Installation & Run
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+### Backend Installation & Run
+
+1. **Navigate to the server directory and create a virtual environment:**
+   ```bash
+   cd server
+   python -m venv venv
+   ```
+
+2. **Activate the virtual environment:**
+   - **Windows (PowerShell):**
+     ```powershell
+     .\venv\Scripts\Activate.ps1
+     ```
+   - **macOS/Linux:**
+     ```bash
+     source venv/bin/activate
+     ```
+
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the FastAPI server:**
+   ```bash
+   uvicorn app:app --reload --port 8000
+   ```
+   The backend server will run on [http://localhost:8000](http://localhost:8000).
+
+---
+
+## Code Quality
+
+To format the frontend codebase with Prettier, run:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run format
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To check formatting without writing changes:
+```bash
+npm run format:check
+```
